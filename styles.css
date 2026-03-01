@@ -1,0 +1,357 @@
+/* ================= THEME VARIABLES ================= */
+
+:root {
+  --bg-main: #0f172a;
+  --bg-sidebar: rgba(15,23,42,0.95);
+  --card-bg: rgba(255,255,255,0.08);
+  --text-color: #ffffff;
+  --accent: #3b82f6;
+}
+
+/* ---------- GLOBAL ---------- */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative; /* IMPORTANT */
+}
+
+/* Background image layer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+/* Overlay layer */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: background 0.5s ease;
+}
+
+/* ---------- THEMES ---------- */
+
+/* BLACK */
+body.black::before {
+  background-image: url("/static/dashboard-bg.jpg");
+}
+body.black::after {
+  background: linear-gradient(to right, rgba(0,0,0,0.85), rgba(30,30,30,0.7));
+}
+
+/* WHITE */
+body.white::before {
+  background-image: url("/static/dashboard-bg.jpg");
+}
+body.white::after {
+  background: rgba(255,255,255,0.8);
+}
+
+/* GREEN */
+body.green::before {
+  background-image: url("/static/dashboard-bg.jpg");
+}
+body.green::after {
+  background: linear-gradient(to right, rgba(0,100,0,0.7), rgba(0,255,150,0.5));
+}
+
+/* BLUE */
+body.blue::before {
+  background-image: url("/static/dashboard-bg.jpg");
+}
+body.blue::after {
+  background: linear-gradient(to right, rgba(0,0,80,0.8), rgba(0,150,255,0.5));
+}
+
+/* ---------- LOGIN ---------- */
+
+.login-page {
+  display: flex;
+  height: 100vh;
+}
+
+.login-left {
+  flex: 1;
+  padding: 80px;
+}
+
+.side-logo {
+  width: 80px;
+  margin-bottom: 30px;
+}
+
+.quote {
+  font-size: 28px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.login-right {
+  width: 420px;
+  background: #0b1c2d;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-logo {
+  width: 160px;
+  margin: 0 auto 30px;
+}
+
+.login-right input {
+  padding: 14px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: none;
+}
+
+.login-right button {
+  padding: 14px;
+  background: #1877f2;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.outline {
+  background: transparent;
+  border: 1px solid #1877f2;
+  margin-top: 10px;
+}
+
+.forgot {
+  text-align: center;
+  margin: 15px 0;
+  color: #aaa;
+  cursor: pointer;
+}
+
+/* ---------- DASHBOARD ---------- */
+
+.dashboard {
+  display: flex;
+  height: 100vh;
+  color: var(--text-color);
+  background: transparent;
+}
+
+/* Keep content above overlay */
+.sidebar,
+.main-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: var(--bg-sidebar);
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  transition: background 0.5s ease;
+}
+
+.sidebar-logo {
+  width: 90px;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  color: #ddd;
+  text-align: left;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.sidebar button:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* MAIN AREA */
+.main-content {
+  flex: 1;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-content h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+/* ---------- GLOW CARDS ---------- */
+
+.card {
+  position: relative;
+  padding: 35px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--accent);
+  transition: 0.4s;
+  color: var(--text-color);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px var(--accent);
+}
+
+/* Glow border */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(45deg, #3b82f6, #6366f1, #0ea5e9);
+  background-size: 400% 400%;
+  animation: glowMove 6s linear infinite;
+  z-index: -1;
+  filter: blur(15px);
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- POPUP ---------- */
+
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(5px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.popup-box {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 18px;
+  width: 300px;
+  text-align: center;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); }
+  to { transform: scale(1); }
+}
+
+/* ---------- PAGE TRANSITION ---------- */
+
+.auth-container,
+.dashboard {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------- THEME SWITCHER ---------- */
+
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
+
+.theme-wrapper {
+  position: relative;
+  width: 180px;
+}
+
+.theme-selected {
+  padding: 10px 15px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.theme-selected:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.theme-menu {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  background: rgba(20,20,20,0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 8px;
+  overflow: hidden;
+  display: none;
+  animation: fadeDown 0.3s ease forwards;
+}
+
+.theme-menu div {
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.theme-menu div:hover {
+  background: rgba(0,255,200,0.3);
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SafeDrop</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="black">
+
+<div class="login-page auth-container">
+  <div class="login-left">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="side-logo">
+    <h1 class="quote">
+      “In an age of communication,<br>encryption is our only whisper.”
+    </h1>
+  </div>
+
+  <div class="login-right">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="login-logo">
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+    <button onclick="login()">Log in</button>
+    <p class="forgot" onclick="forgotPassword()">Forgot password?</p>
+    <hr>
+    <button class="outline" onclick="showRegister()">Create new account</button>
+  </div>
+</div>
+
+<div id="registerBox" class="register-page" style="display:none;">
+  <h2>Create account</h2>
+  <input id="regUser" placeholder="Username">
+  <input id="regPass" type="password" placeholder="Password">
+  <input id="regEmail" placeholder="Email">
+  <input id="regPhone" placeholder="Phone">
+  <button onclick="register()">Sign up</button>
+  <p onclick="showLogin()">Already have an account?</p>
+</div>
+
+<div id="home" class="dashboard" style="display:none;">
+  <aside class="sidebar">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="sidebar-logo">
+    <button onclick="applyTheme('black')">⚫ Black</button>
+    <button onclick="applyTheme('white')">⚪ White</button>
+    <button onclick="applyTheme('green')">🟢 Green</button>
+    <button onclick="applyTheme('blue')">🔵 Blue</button>
+  </aside>
+
+  <main class="main-content">
+    <h1>Hey, Joshna</h1>
+    <p class="subtitle">What can I help you with today?</p>
+    <div class="cards">
+      <div class="card" onclick="encryptFile()">🔐 Encrypt File</div>
+      <div class="card" onclick="decryptFile()">🔓 Decrypt File</div>
+      <div class="card" onclick="shareFile()">📤 Share Securely</div>
+    </div>
+  </main>
+</div>
+
+<div id="passwordPopup" class="popup">
+  <div class="popup-box">
+    <h3 id="popupTitle">Enter Password</h3>
+    <input type="password" id="filePassword">
+    <button onclick="confirmCrypto()">Confirm</button>
+  </div>
+</div>
+
+<input type="file" id="encryptInput" hidden>
+<input type="file" id="decryptInput" hidden>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
