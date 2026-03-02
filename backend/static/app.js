@@ -114,42 +114,56 @@ async function confirmCrypto(){
     "raw", encoder.encode(password), "PBKDF2", false, ["deriveKey"]
   );
 
-  const salt = crypto.getRandomValues(new Uint8Array(16));
-  const aesKey = await crypto.subtle.deriveKey(
-    { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
-    baseKey,
-    { name: "AES-GCM", length: 256 },
-    false,
-    ["encrypt","decrypt"]
-  );
-
   let result;
 
   if (mode === "encrypt") {
-    const iv = crypto.getRandomValues(new Uint8Array(12));
-    const encrypted = await crypto.subtle.encrypt(
-      { name: "AES-GCM", iv }, aesKey, data
-    );
+const salt = crypto.getRandomValues(new Uint8Array(16));
+const iv = crypto.getRandomValues(new Uint8Array(12));
 
-    const combined = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
-    combined.set(salt,0);
-    combined.set(iv,salt.length);
-    combined.set(new Uint8Array(encrypted), salt.length+iv.length);
-    result = combined;
+const aesKey = await crypto.subtle.deriveKey(
+  { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+  baseKey,
+  { name: "AES-GCM", length: 256 },
+  false,
+  ["encrypt"]
+);
 
+const encrypted = await crypto.subtle.encrypt(
+  { name: "AES-GCM", iv },
+  aesKey,
+  data
+);
+
+const combined = new Uint8Array(salt.length + iv.length + encrypted.byteLength);
+combined.set(salt, 0);
+combined.set(iv, salt.length);
+combined.set(new Uint8Array(encrypted), salt.length + iv.length);
+result = combined;
   } else {
-    const salt = new Uint8Array(data.slice(0,16));
-    const iv = new Uint8Array(data.slice(16,28));
-    const encryptedData = data.slice(28);
+    const salt = new Uint8Array(data.slice(0, 16));
+const iv = new Uint8Array(data.slice(16, 28));
+const encryptedData = data.slice(28);
 
-    try {
-      result = await crypto.subtle.decrypt(
-        { name: "AES-GCM", iv }, aesKey, encryptedData
-      );
-    } catch {
-      alert("Wrong password");
-      return;
-    }
+const aesKey = await crypto.subtle.deriveKey(
+  { name: "PBKDF2", salt, iterations: 100000, hash: "SHA-256" },
+  baseKey,
+  { name: "AES-GCM", length: 256 },
+  false,
+  ["decrypt"]
+);
+
+try {
+  result = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv },
+    aesKey,
+    encryptedData
+  );
+} catch {
+  alert("Wrong password");
+  filePassword.value = "";
+  passwordPopup.style.display = "none"; // 👈 closes popup
+  return;
+}
   }
 
   const blob = new Blob([result]);
@@ -173,3 +187,4 @@ function applyTheme(theme){
 window.addEventListener("DOMContentLoaded", () => {
   applyTheme(localStorage.getItem("theme") || "black");
 });
+
