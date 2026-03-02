@@ -356,3 +356,9 @@ body.blue::after {
   to { opacity: 1; transform: translateY(0); }
 
 }
+.sidebar-logo {
+  width: 120px;
+  height: auto;
+  display: block;
+  background: red; /* debug */
+}
