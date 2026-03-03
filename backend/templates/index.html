@@ -27,14 +27,22 @@
   </div>
 </div>
 
-<div id="registerBox" class="register-page" style="display:none;">
-  <h2>Create account</h2>
-  <input id="regUser" placeholder="Username">
-  <input id="regPass" type="password" placeholder="Password">
-  <input id="regEmail" placeholder="Email">
-  <input id="regPhone" placeholder="Phone">
-  <button onclick="register()">Sign up</button>
-  <p onclick="showLogin()">Already have an account?</p>
+<div id="registerBox" class="register-overlay" style="display:none;">
+  <div class="register-card">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="register-logo">
+
+    <h2>Create your account</h2>
+    <p class="register-sub">Secure. Private. Yours.</p>
+
+    <input id="regUser" placeholder="Username">
+    <input id="regPass" type="password" placeholder="Password">
+    <input id="regEmail" placeholder="Email">
+    <input id="regPhone" placeholder="Phone">
+
+    <button onclick="register()">Create Account</button>
+
+    <p class="switch-auth" onclick="showLogin()">← Back to login</p>
+  </div>
 </div>
 
 <div id="home" class="dashboard" style="display:none;">
@@ -72,3 +80,4 @@
 </body>
 
 </html>
+
