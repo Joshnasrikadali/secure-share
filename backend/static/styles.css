@@ -362,3 +362,83 @@ body.blue::after {
   display: block;
   background: red; /* debug */
 }
+
+/* ---------- REGISTER PAGE (MODERN) ---------- */
+
+.register-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.register-card {
+  width: 420px;
+  padding: 40px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  text-align: center;
+  animation: scaleIn 0.4s ease;
+}
+
+.register-logo {
+  width: 90px;
+  margin-bottom: 20px;
+}
+
+.register-card h2 {
+  margin: 10px 0 5px;
+  font-size: 26px;
+}
+
+.register-sub {
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 25px;
+}
+
+.register-card input {
+  width: 100%;
+  padding: 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.register-card button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 18px;
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.register-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px #3b82f6;
+}
+
+.switch-auth {
+  margin-top: 18px;
+  color: #9ca3af;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.switch-auth:hover {
+  text-decoration: underline;
+}
